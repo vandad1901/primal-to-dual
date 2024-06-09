@@ -39,7 +39,7 @@ export default function Home() {
     );
 
     return (
-        <main className="container flex flex-col gap-3 rounded-b-lg border-2 border-t-0 bg-card p-4 text-card-foreground">
+        <main className="container flex flex-col gap-3 overflow-scroll rounded-b-lg border-2 border-t-0 bg-card p-4 text-card-foreground">
             <h1 className="py-6 text-xl font-bold">Primal to dual converter</h1>
             <p>Enter the linear programming problem using the form</p>
             <div>
@@ -177,7 +177,7 @@ export default function Home() {
                     <Fragment key={i}>
                         <Input
                             type="number"
-                            className="max-w-20 border-2"
+                            className="min-w-16 max-w-20 border-2"
                             value={+c[i]}
                             onChange={(e) =>
                                 updateC((draft) => {
@@ -187,7 +187,12 @@ export default function Home() {
                                 })
                             }
                         />
-                        <p className={clsx("my-auto", roboto_mono.className)}>
+                        <p
+                            className={clsx(
+                                "my-auto",
+                                roboto_mono.className,
+                                i >= 9 ? "min-w-[5ch]" : "min-w-[4ch]",
+                            )}>
                             {isDual ? "y" : "x"}
                             {i + 1}
                             {i < n - 1 ? " +" : " "}
@@ -202,7 +207,7 @@ export default function Home() {
                             <Fragment key={j}>
                                 <Input
                                     type="number"
-                                    className="max-w-20 border-2"
+                                    className="min-w-16 max-w-20 border-2"
                                     value={Number(A[i][j])}
                                     onChange={(e) =>
                                         updateA((draft) => {
@@ -216,7 +221,18 @@ export default function Home() {
                                         })
                                     }
                                 />
-                                <p className={clsx("my-auto", roboto_mono.className)}>
+                                <p
+                                    className={clsx(
+                                        "my-auto",
+                                        roboto_mono.className,
+                                        j >= 9
+                                            ? j < n - 1
+                                                ? "min-w-[5ch]"
+                                                : "min-w-[3ch]"
+                                            : j < n - 1
+                                              ? "min-w-[4ch]"
+                                              : "min-w-[2ch]",
+                                    )}>
                                     {isDual ? "y" : "x"}
                                     {j + 1}
                                     {j < n - 1 ? " +" : " "}
@@ -230,7 +246,7 @@ export default function Home() {
                                     draft[i] = e as "leq" | "geq" | "eq";
                                 })
                             }>
-                            <SelectTrigger className="max-w-14 border-2">
+                            <SelectTrigger className="min-w-14 max-w-14 border-2">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
@@ -241,7 +257,7 @@ export default function Home() {
                         </Select>
                         <Input
                             type="number"
-                            className="max-w-20 border-2"
+                            className="min-w-16 max-w-20 border-2"
                             value={b[i]}
                             onChange={(e) => {
                                 updateB((draft) => {
@@ -267,7 +283,7 @@ export default function Home() {
                                     draft[i] = e;
                                 })
                             }>
-                            <SelectTrigger className="w-18 border-2">
+                            <SelectTrigger className="w-[4.5rem] min-w-[4.5rem] border-2">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>

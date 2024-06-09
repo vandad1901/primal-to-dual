@@ -7,7 +7,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 export default function Header() {
     return (
         <div className="w-full border-b-2">
-            <div className="container flex h-14 max-w-screen-2xl items-center justify-between">
+            <div className="container flex h-14 items-center justify-between">
                 <h1 className="font-bold">Primal to dual converter</h1>
                 <div className="flex flex-row gap-4">
                     <ModeToggle />
