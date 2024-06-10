@@ -49,7 +49,8 @@ export default function Home() {
                         console.log({ c, A, b, constraintTypes, variableBounds });
                         setM(n);
                         setN(m);
-                        setLPType(LPType === "max" ? "min" : "max");
+                        const newLPType = LPType === "max" ? "min" : "max";
+                        setLPType(newLPType);
                         updateC(b);
                         updateB(c);
                         const AT = Array.from({ length: n }).map((_, i) =>
@@ -57,14 +58,14 @@ export default function Home() {
                         );
                         updateA(AT);
                         const newConstraintTypes = variableBounds.map((bound) => {
-                            if (bound === "positive") return "leq";
-                            if (bound === "negative") return "geq";
+                            if (bound === "positive") return newLPType == "max" ? "leq" : "geq";
+                            if (bound === "negative") return newLPType == "max" ? "geq" : "leq";
                             return "eq";
                         });
                         updateConstraintTypes(newConstraintTypes);
                         const newVariableBounds = constraintTypes.map((type) => {
-                            if (type === "leq") return "positive";
-                            if (type === "geq") return "negative";
+                            if (type === "leq") return LPType == "max" ? "positive" : "negative";
+                            if (type === "geq") return LPType == "min" ? "positive" : "negative";
                             return "urs";
                         });
                         updateVariableBounds(newVariableBounds);
